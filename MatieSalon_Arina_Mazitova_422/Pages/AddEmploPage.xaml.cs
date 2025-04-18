@@ -28,7 +28,7 @@ namespace MatieSalon_Arina_Mazitova_422.Pages
             _users = _users ?? new Users();
 
             DataContext = _users;
-
+             
             FullNameTb.Text = _users.FullName;
             EmailTb.Text = _users.Email;
             PhoneTb.Text = _users.Phone;
