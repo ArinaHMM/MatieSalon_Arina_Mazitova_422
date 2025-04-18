@@ -26,6 +26,9 @@
                     <Button Width="100" Name="EditBtn" Click="EditBtn_Click">
                         Изменить
                     </Button>
+                    <Button Width="100" Name="Back" Click="Back_Click">
+                        Назад
+                    </Button>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

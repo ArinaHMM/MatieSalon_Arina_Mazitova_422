@@ -69,5 +69,10 @@ namespace MatieSalon_Arina_Mazitova_422.Pages
         {
             CollDG.ItemsSource = App.db.Collections.ToList();
         }
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
+        }
     }
 }

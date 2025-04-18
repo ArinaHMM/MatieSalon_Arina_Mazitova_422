@@ -1,0 +1,30 @@
+﻿<Page x:Class="MatieSalon_Arina_Mazitova_422.Pages.UserHomePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MatieSalon_Arina_Mazitova_422.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="UserHomePage">
+
+    <Grid>
+        <StackPanel>
+            <StackPanel>
+                <Button x:Name="LC" Click="LC_Click">
+                    Личный кабинет
+                </Button>
+                <Button x:Name="Ser" Click="Ser_Click">
+                    Услуги
+                </Button>
+                <Button x:Name="Coll" Click="Coll_Click">
+                    Направления
+                </Button>
+                <Button x:Name="Emp" Click="Emp_Click">
+                    Пользователи
+                </Button>
+
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

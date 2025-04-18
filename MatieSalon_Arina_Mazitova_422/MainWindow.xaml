@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MatieSalon_Arina_Mazitova_422"
         mc:Ignorable="d"
-        Title="Лавка «Матье»" Height="600" Width="900"
+        Title="Лавка «Матье»" Height="600" Width="900" Icon="/Images/Logo.ico"
         WindowStartupLocation="CenterScreen">
 
     <Grid>
@@ -19,16 +19,7 @@
                 <Image Source="Images/Logo.ico" Height="80" Margin="10" 
                        HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
-                <Button  x:Name="btnHome" Content="Главная" 
-                        Click="btnHome_Click" Tag="HomePage"/>
-                <Button   x:Name="btnServices" Content="Коллекции" 
-                        Click="btnServices_Click" Tag="ServicesPage"/>
-                <Button   x:Name="btnProfile" Content="Личный кабинет"  
-                        Click="btnProfile_Click" Tag="UserCabinetPage"/>
-                <Button   x:Name="btnAppointments" Content="Мои записи"  
-                        Click="btnAppointments_Click" Tag="AppointmentsPage"/>
-                <Button   x:Name="btnLogout" Content="Выйти" 
-                        Click="Logout_Click" Margin="0,20,0,0"/>
+               
             </StackPanel>
         </Border>
 

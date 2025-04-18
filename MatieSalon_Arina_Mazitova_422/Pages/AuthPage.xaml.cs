@@ -34,7 +34,7 @@ namespace MatieSalon_Arina_Mazitova_422.Pages
             if (user != null)
             {
                 MessageBox.Show("Вы вошли!");
-                NavigationService.Navigate(new UserCabinetPage(user));
+                NavigationService.Navigate(new UserHomePage(user));
             }
             else
             {

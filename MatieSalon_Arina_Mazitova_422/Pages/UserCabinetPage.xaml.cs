@@ -55,5 +55,10 @@ namespace MatieSalon_Arina_Mazitova_422.Pages
                 MessageBox.Show("Введите корректную сумму.");
             }
         }
+
+        private void back_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
+        }
     }
 }

@@ -29,38 +29,6 @@ namespace MatieSalon_Arina_Mazitova_422
             
         }
         
-        private void NavButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Logout_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnHome_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnServices_Click(object sender, RoutedEventArgs e)
-        {
-            if(App.CurrentUser != null)
-            {
-                btnServices.Visibility = Visibility.Visible;
-            }
-            MainFrame.Navigate(new CollectionsPage());
-        }
-
-        private void btnProfile_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnAppointments_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+      
     }
 }
