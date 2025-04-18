@@ -1,0 +1,9 @@
+﻿<Application x:Class="MatieSalon_Arina_Mazitova_422.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MatieSalon_Arina_Mazitova_422"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>
