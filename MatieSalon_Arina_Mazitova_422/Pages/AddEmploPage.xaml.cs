@@ -25,13 +25,10 @@ namespace MatieSalon_Arina_Mazitova_422.Pages
         public AddEmploPage(Users _users)
         {
             InitializeComponent();
-            // Инициализируем объект коллекции
             _users = _users ?? new Users();
 
-            // Устанавливаем DataContext
             DataContext = _users;
 
-            // Заполняем поля
             FullNameTb.Text = _users.FullName;
             EmailTb.Text = _users.Email;
             PhoneTb.Text = _users.Phone;
@@ -39,7 +36,7 @@ namespace MatieSalon_Arina_Mazitova_422.Pages
             PasswordTb.Text = _users.PasswordHash;
             BioTb.Text = _users.Bio;
         }
-        
+
 
         private void RegisterBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -50,14 +47,12 @@ namespace MatieSalon_Arina_Mazitova_422.Pages
             string password = PasswordTb.Text.Trim();
             string bio = BioTb.Text.Trim();
 
-
-
-            if (App.db.Users.Any(u => u.Email == email || u.Username == username))
+            var existingUser = App.db.Users.FirstOrDefault(u => u.Email == email || u.Username == username);
+            if (existingUser != null)
             {
-                MessageBox.Show("Такой пользователь уже существует.");
+                MessageBox.Show("Пользователь с таким email или именем уже существует.");
                 return;
             }
-
 
             var newUser = new Users
             {
@@ -65,7 +60,7 @@ namespace MatieSalon_Arina_Mazitova_422.Pages
                 Email = email,
                 Phone = phone,
                 Username = username,
-                PasswordHash = password,
+                PasswordHash = password, 
                 Bio = bio,
                 RoleID = 1,
                 Balance = 0.00m,
@@ -80,7 +75,6 @@ namespace MatieSalon_Arina_Mazitova_422.Pages
             MessageBox.Show("Регистрация прошла успешно!");
             NavigationService.GoBack();
         }
-
 
     }
 }

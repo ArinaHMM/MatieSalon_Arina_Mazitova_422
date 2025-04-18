@@ -23,6 +23,9 @@
                 <Button x:Name="Emp" Click="Emp_Click">
                     Пользователи
                 </Button>
+                <Button x:Name="Backs" Click="Backs_Click">
+                    Выйти
+                </Button>
 
             </StackPanel>
         </StackPanel>

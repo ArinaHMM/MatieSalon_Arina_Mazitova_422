@@ -30,13 +30,10 @@ namespace MatieSalon_Arina_Mazitova_422.Pages
         {
             InitializeComponent();
 
-            // Инициализируем объект коллекции
             _collections = collections ?? new Collections();
 
-            // Устанавливаем DataContext
             DataContext = _collections;
 
-            // Заполняем поля
             NameTextBox.Text = _collections.Name;
             DesTextBox.Text = _collections.Description;
             _imageData = _collections.ImagePath;
@@ -77,12 +74,11 @@ namespace MatieSalon_Arina_Mazitova_422.Pages
         {
             try
             {
-                // Заполняем данные коллекции
                 _collections.Name = NameTextBox.Text;
                 _collections.Description = DesTextBox.Text;
                 _collections.ImagePath = _imageData;
 
-                if (_collections.CollectionID == 0) // Новая коллекция
+                if (_collections.CollectionID == 0) 
                 {
                     App.db.Collections.Add(_collections);
                 }

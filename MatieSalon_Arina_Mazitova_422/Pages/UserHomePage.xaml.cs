@@ -4,9 +4,6 @@ using System.Windows.Controls;
 
 namespace MatieSalon_Arina_Mazitova_422.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для UserHomePage.xaml
-    /// </summary>
     public partial class UserHomePage : Page
     {
         public Users CurrentUser { get; set; }
@@ -15,6 +12,42 @@ namespace MatieSalon_Arina_Mazitova_422.Pages
         {
             InitializeComponent();
             CurrentUser = user;
+
+            ConfigureVisibilityBasedOnRole();
+        }
+
+        private void ConfigureVisibilityBasedOnRole()
+        {
+            switch (CurrentUser.RoleID)
+            {
+                case 1: 
+                    LC.Visibility = Visibility.Visible;
+                    Ser.Visibility = Visibility.Collapsed;
+                    Coll.Visibility = Visibility.Collapsed;
+                    Emp.Visibility = Visibility.Collapsed; 
+                    break;
+
+                case 3: 
+                    LC.Visibility = Visibility.Collapsed;
+                    Ser.Visibility = Visibility.Collapsed;
+                    Coll.Visibility = Visibility.Collapsed;
+                    Emp.Visibility = Visibility.Visible;   
+                    break;
+
+                case 4: 
+                    LC.Visibility = Visibility.Collapsed;
+                    Ser.Visibility = Visibility.Visible; 
+                    Coll.Visibility = Visibility.Visible;  
+                    Emp.Visibility = Visibility.Collapsed;   
+                    break;
+
+                default:
+                    LC.Visibility = Visibility.Collapsed;
+                    Ser.Visibility = Visibility.Collapsed;
+                    Coll.Visibility = Visibility.Collapsed;
+                    Emp.Visibility = Visibility.Collapsed;
+                    break;
+            }
         }
 
         private void LC_Click(object sender, RoutedEventArgs e)
@@ -35,6 +68,13 @@ namespace MatieSalon_Arina_Mazitova_422.Pages
         private void Emp_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new EmployeePage());
+        }
+
+        private void Backs_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AuthPage());
+            CurrentUser = null;
+
         }
     }
 }
