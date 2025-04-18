@@ -35,7 +35,7 @@ namespace MatieSalon_Arina_Mazitova_422.Pages
             string password = PasswordTb.Password.Trim();
             string bio = BioTb.Text.Trim();
 
-           
+            
 
             // Проверка уникальности
             if (App.db.Users.Any(u => u.Email == email || u.Username == username))
