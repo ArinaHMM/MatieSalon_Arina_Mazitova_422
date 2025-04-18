@@ -29,19 +29,25 @@ namespace MatieSalon_Arina_Mazitova_422.Pages
             string useremail = LoginTb.Text.Trim();
             string userpas = PasswordTb.Password.Trim();
 
-            var user = App.db.Users.FirstOrDefault(u => u.Email == useremail && u.Password == userpas);
+            var user = App.db.Users.FirstOrDefault(u => u.Email == useremail && u.PasswordHash == userpas);
 
             if (user != null)
             {
                 MessageBox.Show("Вы вошли!");
-                //NavigationService.Navigate(new ListsPages());
+                NavigationService.Navigate(new UserCabinetPage(user));
             }
             else
             {
                 MessageBox.Show("Неверный логин или пароль.");
             }
         }
+
+        
+
+        private void RegBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new RegistrationPage());
+        }
     }
 }
-    }
-}
+   

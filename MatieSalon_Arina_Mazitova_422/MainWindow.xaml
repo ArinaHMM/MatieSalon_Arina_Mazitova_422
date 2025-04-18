@@ -5,16 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MatieSalon_Arina_Mazitova_422"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Лавка «Матье»" Height="600" Width="900"
+        WindowStartupLocation="CenterScreen">
+
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="99*"/>
-            <RowDefinition Height="335*"/>
-        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="67*"/>
-            <ColumnDefinition Width="333*"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Frame x:Name="ManFrame" Grid.ColumnSpan="2" Grid.RowSpan="2"></Frame>
+
+        <Border Grid.Column="0">
+            <StackPanel>
+                <Image Source="Images/Logo.ico" Height="80" Margin="10" 
+                       HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+                <Button  x:Name="btnHome" Content="Главная" 
+                        Click="btnHome_Click" Tag="HomePage"/>
+                <Button   x:Name="btnServices" Content="Коллекции" 
+                        Click="btnServices_Click" Tag="ServicesPage"/>
+                <Button   x:Name="btnProfile" Content="Личный кабинет"  
+                        Click="btnProfile_Click" Tag="UserCabinetPage"/>
+                <Button   x:Name="btnAppointments" Content="Мои записи"  
+                        Click="btnAppointments_Click" Tag="AppointmentsPage"/>
+                <Button   x:Name="btnLogout" Content="Выйти" 
+                        Click="Logout_Click" Margin="0,20,0,0"/>
+            </StackPanel>
+        </Border>
+
+        <Frame x:Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

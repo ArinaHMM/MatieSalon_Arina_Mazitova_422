@@ -14,6 +14,7 @@ namespace MatieSalon_Arina_Mazitova_422
     /// </summary>
     public partial class App : Application
     {
-        public static MatieSalonEntities db = new MatieSalonEntities();
+        public static MatieSalonEntities1 db = new MatieSalonEntities1();
+        public static Users CurrentUser { get; set; }
     }
 }

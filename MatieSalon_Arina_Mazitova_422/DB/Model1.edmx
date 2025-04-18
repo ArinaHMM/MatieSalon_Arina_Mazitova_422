@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище MatieSalonModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище MatieSalonModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Appointments">
           <Key>
             <PropertyRef Name="AppointmentID" />
@@ -32,7 +32,7 @@
           <Property Name="CollectionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="255" />
-          <Property Name="ImagePath" Type="nvarchar" MaxLength="255" />
+          <Property Name="ImagePath" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="MasterServices">
           <Key>
@@ -114,7 +114,7 @@
           <Property Name="Duration" Type="int" Nullable="false" />
           <Property Name="CollectionID" Type="int" />
           <Property Name="CategoryID" Type="int" Nullable="false" />
-          <Property Name="ImagePath" Type="nvarchar" MaxLength="255" />
+          <Property Name="ImagePath" Type="varbinary(max)" />
           <Property Name="CreatedAt" Type="datetime" />
           <Property Name="UpdatedAt" Type="datetime" />
         </EntityType>
@@ -385,8 +385,7 @@
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MatieSalonModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -404,26 +403,8 @@
           <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Users" Relationship="Self.FK__Appointme__Clien__440B1D61" FromRole="Appointments" ToRole="Users" />
           <NavigationProperty Name="MasterServices" Relationship="Self.FK__Appointme__Maste__44FF419A" FromRole="Appointments" ToRole="MasterServices" />
-          <NavigationProperty Name="AppointmentStatuses" Relationship="Self.FK__Appointme__Statu__45F365D3" FromRole="Appointments" ToRole="AppointmentStatuses" />
           <NavigationProperty Name="Reviews" Relationship="Self.FK__Reviews__Appoint__4D94879B" FromRole="Appointments" ToRole="Reviews" />
-        </EntityType>
-        <EntityType Name="AppointmentStatuses">
-          <Key>
-            <PropertyRef Name="StatusID" />
-          </Key>
-          <Property Name="StatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StatusName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Appointments" Relationship="Self.FK__Appointme__Statu__45F365D3" FromRole="AppointmentStatuses" ToRole="Appointments" />
-        </EntityType>
-        <EntityType Name="Collections">
-          <Key>
-            <PropertyRef Name="CollectionID" />
-          </Key>
-          <Property Name="CollectionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="ImagePath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Services" Relationship="Self.FK__Services__Collec__36B12243" FromRole="Collections" ToRole="Services" />
+          <NavigationProperty Name="AppointmentStatuses" Relationship="MatieSalonModel.FK__Appointme__Statu__45F365D3" FromRole="Appointments" ToRole="AppointmentStatuses" />
         </EntityType>
         <EntityType Name="MasterServices">
           <Key>
@@ -436,7 +417,7 @@
           <Property Name="IsActive" Type="Boolean" />
           <NavigationProperty Name="Appointments" Relationship="Self.FK__Appointme__Maste__44FF419A" FromRole="MasterServices" ToRole="Appointments" />
           <NavigationProperty Name="Users" Relationship="Self.FK__MasterSer__Maste__3C69FB99" FromRole="MasterServices" ToRole="Users" />
-          <NavigationProperty Name="Services" Relationship="Self.FK__MasterSer__Servi__3D5E1FD2" FromRole="MasterServices" ToRole="Services" />
+          <NavigationProperty Name="Services" Relationship="MatieSalonModel.FK__MasterSer__Servi__3D5E1FD2" FromRole="MasterServices" ToRole="Services" />
         </EntityType>
         <EntityType Name="QualificationRequests">
           <Key>
@@ -493,7 +474,7 @@
           </Key>
           <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Services" Relationship="Self.FK__Services__Catego__37A5467C" FromRole="ServiceCategories" ToRole="Services" />
+          <NavigationProperty Name="Services" Relationship="MatieSalonModel.FK__Services__Catego__37A5467C" FromRole="ServiceCategories" ToRole="Services" />
         </EntityType>
         <EntityType Name="ServiceHistory">
           <Key>
@@ -505,26 +486,7 @@
           <Property Name="ChangeDate" Type="DateTime" Precision="3" />
           <Property Name="ChangeDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Users" Relationship="Self.FK__ServiceHi__Chang__5BE2A6F2" FromRole="ServiceHistory" ToRole="Users" />
-          <NavigationProperty Name="Services" Relationship="Self.FK__ServiceHi__Servi__5AEE82B9" FromRole="ServiceHistory" ToRole="Services" />
-        </EntityType>
-        <EntityType Name="Services">
-          <Key>
-            <PropertyRef Name="ServiceID" />
-          </Key>
-          <Property Name="ServiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="BasePrice" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="Duration" Type="Int32" Nullable="false" />
-          <Property Name="CollectionID" Type="Int32" />
-          <Property Name="CategoryID" Type="Int32" Nullable="false" />
-          <Property Name="ImagePath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Collections" Relationship="Self.FK__Services__Collec__36B12243" FromRole="Services" ToRole="Collections" />
-          <NavigationProperty Name="MasterServices" Relationship="Self.FK__MasterSer__Servi__3D5E1FD2" FromRole="Services" ToRole="MasterServices" />
-          <NavigationProperty Name="ServiceCategories" Relationship="Self.FK__Services__Catego__37A5467C" FromRole="Services" ToRole="ServiceCategories" />
-          <NavigationProperty Name="ServiceHistory" Relationship="Self.FK__ServiceHi__Servi__5AEE82B9" FromRole="Services" ToRole="ServiceHistory" />
+          <NavigationProperty Name="Services" Relationship="MatieSalonModel.FK__ServiceHi__Servi__5AEE82B9" FromRole="ServiceHistory" ToRole="Services" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -582,18 +544,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Appointme__Statu__45F365D3">
-          <End Role="AppointmentStatuses" Type="Self.AppointmentStatuses" Multiplicity="1" />
-          <End Role="Appointments" Type="Self.Appointments" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AppointmentStatuses">
-              <PropertyRef Name="StatusID" />
-            </Principal>
-            <Dependent Role="Appointments">
-              <PropertyRef Name="StatusID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Reviews__Appoint__4D94879B">
           <End Role="Appointments" Type="Self.Appointments" Multiplicity="1" />
           <End Role="Reviews" Type="Self.Reviews" Multiplicity="*" />
@@ -606,18 +556,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Services__Collec__36B12243">
-          <End Role="Collections" Type="Self.Collections" Multiplicity="0..1" />
-          <End Role="Services" Type="Self.Services" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Collections">
-              <PropertyRef Name="CollectionID" />
-            </Principal>
-            <Dependent Role="Services">
-              <PropertyRef Name="CollectionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__MasterSer__Maste__3C69FB99">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="MasterServices" Type="Self.MasterServices" Multiplicity="*" />
@@ -627,18 +565,6 @@
             </Principal>
             <Dependent Role="MasterServices">
               <PropertyRef Name="MasterID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__MasterSer__Servi__3D5E1FD2">
-          <End Role="Services" Type="Self.Services" Multiplicity="1" />
-          <End Role="MasterServices" Type="Self.MasterServices" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Services">
-              <PropertyRef Name="ServiceID" />
-            </Principal>
-            <Dependent Role="MasterServices">
-              <PropertyRef Name="ServiceID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -690,18 +616,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Services__Catego__37A5467C">
-          <End Role="ServiceCategories" Type="Self.ServiceCategories" Multiplicity="1" />
-          <End Role="Services" Type="Self.Services" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ServiceCategories">
-              <PropertyRef Name="CategoryID" />
-            </Principal>
-            <Dependent Role="Services">
-              <PropertyRef Name="CategoryID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__ServiceHi__Chang__5BE2A6F2">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="ServiceHistory" Type="Self.ServiceHistory" Multiplicity="*" />
@@ -714,22 +628,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ServiceHi__Servi__5AEE82B9">
-          <End Role="Services" Type="Self.Services" Multiplicity="1" />
-          <End Role="ServiceHistory" Type="Self.ServiceHistory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Services">
-              <PropertyRef Name="ServiceID" />
-            </Principal>
-            <Dependent Role="ServiceHistory">
-              <PropertyRef Name="ServiceID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="MatieSalonEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="MatieSalonEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Appointments" EntityType="Self.Appointments" />
-          <EntitySet Name="AppointmentStatuses" EntityType="Self.AppointmentStatuses" />
-          <EntitySet Name="Collections" EntityType="Self.Collections" />
           <EntitySet Name="MasterServices" EntityType="Self.MasterServices" />
           <EntitySet Name="QualificationRequests" EntityType="Self.QualificationRequests" />
           <EntitySet Name="RequestStatuses" EntityType="Self.RequestStatuses" />
@@ -738,7 +638,6 @@
           <EntitySet Name="Roles" EntityType="Self.Roles" />
           <EntitySet Name="ServiceCategories" EntityType="Self.ServiceCategories" />
           <EntitySet Name="ServiceHistory" EntityType="Self.ServiceHistory" />
-          <EntitySet Name="Services" EntityType="Self.Services" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Users" EntityType="Self.Users" />
           <AssociationSet Name="FK__Appointme__Clien__440B1D61" Association="Self.FK__Appointme__Clien__440B1D61">
@@ -749,24 +648,12 @@
             <End Role="MasterServices" EntitySet="MasterServices" />
             <End Role="Appointments" EntitySet="Appointments" />
           </AssociationSet>
-          <AssociationSet Name="FK__Appointme__Statu__45F365D3" Association="Self.FK__Appointme__Statu__45F365D3">
-            <End Role="AppointmentStatuses" EntitySet="AppointmentStatuses" />
-            <End Role="Appointments" EntitySet="Appointments" />
-          </AssociationSet>
           <AssociationSet Name="FK__Reviews__Appoint__4D94879B" Association="Self.FK__Reviews__Appoint__4D94879B">
             <End Role="Appointments" EntitySet="Appointments" />
             <End Role="Reviews" EntitySet="Reviews" />
           </AssociationSet>
-          <AssociationSet Name="FK__Services__Collec__36B12243" Association="Self.FK__Services__Collec__36B12243">
-            <End Role="Collections" EntitySet="Collections" />
-            <End Role="Services" EntitySet="Services" />
-          </AssociationSet>
           <AssociationSet Name="FK__MasterSer__Maste__3C69FB99" Association="Self.FK__MasterSer__Maste__3C69FB99">
             <End Role="Users" EntitySet="Users" />
-            <End Role="MasterServices" EntitySet="MasterServices" />
-          </AssociationSet>
-          <AssociationSet Name="FK__MasterSer__Servi__3D5E1FD2" Association="Self.FK__MasterSer__Servi__3D5E1FD2">
-            <End Role="Services" EntitySet="Services" />
             <End Role="MasterServices" EntitySet="MasterServices" />
           </AssociationSet>
           <AssociationSet Name="FK__Qualifica__Maste__5629CD9C" Association="Self.FK__Qualifica__Maste__5629CD9C">
@@ -785,25 +672,137 @@
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
-          <AssociationSet Name="FK__Services__Catego__37A5467C" Association="Self.FK__Services__Catego__37A5467C">
-            <End Role="ServiceCategories" EntitySet="ServiceCategories" />
-            <End Role="Services" EntitySet="Services" />
-          </AssociationSet>
           <AssociationSet Name="FK__ServiceHi__Chang__5BE2A6F2" Association="Self.FK__ServiceHi__Chang__5BE2A6F2">
             <End Role="Users" EntitySet="Users" />
             <End Role="ServiceHistory" EntitySet="ServiceHistory" />
           </AssociationSet>
-          <AssociationSet Name="FK__ServiceHi__Servi__5AEE82B9" Association="Self.FK__ServiceHi__Servi__5AEE82B9">
+          <EntitySet Name="AppointmentStatuses" EntityType="MatieSalonModel.AppointmentStatuses" />
+          <EntitySet Name="Collections" EntityType="MatieSalonModel.Collections" />
+          <AssociationSet Name="FK__Appointme__Statu__45F365D3" Association="MatieSalonModel.FK__Appointme__Statu__45F365D3">
+            <End Role="AppointmentStatuses" EntitySet="AppointmentStatuses" />
+            <End Role="Appointments" EntitySet="Appointments" />
+          </AssociationSet>
+          <EntitySet Name="Services" EntityType="MatieSalonModel.Services" />
+          <AssociationSet Name="FK__Services__Collec__36B12243" Association="MatieSalonModel.FK__Services__Collec__36B12243">
+            <End Role="Collections" EntitySet="Collections" />
+            <End Role="Services" EntitySet="Services" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MasterSer__Servi__3D5E1FD2" Association="MatieSalonModel.FK__MasterSer__Servi__3D5E1FD2">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="MasterServices" EntitySet="MasterServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Services__Catego__37A5467C" Association="MatieSalonModel.FK__Services__Catego__37A5467C">
+            <End Role="ServiceCategories" EntitySet="ServiceCategories" />
+            <End Role="Services" EntitySet="Services" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceHi__Servi__5AEE82B9" Association="MatieSalonModel.FK__ServiceHi__Servi__5AEE82B9">
             <End Role="Services" EntitySet="Services" />
             <End Role="ServiceHistory" EntitySet="ServiceHistory" />
           </AssociationSet>
-        </EntityContainer>
-      </Schema>
+          </EntityContainer>
+        <EntityType Name="AppointmentStatuses">
+          <Key>
+            <PropertyRef Name="StatusID" />
+          </Key>
+          <Property Name="StatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StatusName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Appointments" Relationship="MatieSalonModel.FK__Appointme__Statu__45F365D3" FromRole="AppointmentStatuses" ToRole="Appointments" />
+        </EntityType>
+        <EntityType Name="Collections">
+          <Key>
+            <PropertyRef Name="CollectionID" />
+          </Key>
+          <Property Name="CollectionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ImagePath" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Services" Relationship="MatieSalonModel.FK__Services__Collec__36B12243" FromRole="Collections" ToRole="Services" />
+        </EntityType>
+        <Association Name="FK__Appointme__Statu__45F365D3">
+          <End Type="MatieSalonModel.AppointmentStatuses" Role="AppointmentStatuses" Multiplicity="1" />
+          <End Type="MatieSalonModel.Appointments" Role="Appointments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppointmentStatuses">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="Appointments">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Services">
+          <Key>
+            <PropertyRef Name="ServiceID" />
+          </Key>
+          <Property Name="ServiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BasePrice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Duration" Type="Int32" Nullable="false" />
+          <Property Name="CollectionID" Type="Int32" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <Property Name="ImagePath" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Collections" Relationship="MatieSalonModel.FK__Services__Collec__36B12243" FromRole="Services" ToRole="Collections" />
+          <NavigationProperty Name="MasterServices" Relationship="MatieSalonModel.FK__MasterSer__Servi__3D5E1FD2" FromRole="Services" ToRole="MasterServices" />
+          <NavigationProperty Name="ServiceCategories" Relationship="MatieSalonModel.FK__Services__Catego__37A5467C" FromRole="Services" ToRole="ServiceCategories" />
+          <NavigationProperty Name="ServiceHistory" Relationship="MatieSalonModel.FK__ServiceHi__Servi__5AEE82B9" FromRole="Services" ToRole="ServiceHistory" />
+        </EntityType>
+        <Association Name="FK__Services__Collec__36B12243">
+          <End Type="MatieSalonModel.Collections" Role="Collections" Multiplicity="0..1" />
+          <End Type="MatieSalonModel.Services" Role="Services" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Collections">
+              <PropertyRef Name="CollectionID" />
+            </Principal>
+            <Dependent Role="Services">
+              <PropertyRef Name="CollectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MasterSer__Servi__3D5E1FD2">
+          <End Type="MatieSalonModel.Services" Role="Services" Multiplicity="1" />
+          <End Type="MatieSalonModel.MasterServices" Role="MasterServices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="ServiceID" />
+            </Principal>
+            <Dependent Role="MasterServices">
+              <PropertyRef Name="ServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Services__Catego__37A5467C">
+          <End Type="MatieSalonModel.ServiceCategories" Role="ServiceCategories" Multiplicity="1" />
+          <End Type="MatieSalonModel.Services" Role="Services" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceCategories">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Services">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceHi__Servi__5AEE82B9">
+          <End Type="MatieSalonModel.Services" Role="Services" Multiplicity="1" />
+          <End Type="MatieSalonModel.ServiceHistory" Role="ServiceHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="ServiceID" />
+            </Principal>
+            <Dependent Role="ServiceHistory">
+              <PropertyRef Name="ServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище MatieSalonModelContainer" CdmEntityContainer="MatieSalonEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище MatieSalonModelContainer" CdmEntityContainer="MatieSalonEntities1">
           <EntitySetMapping Name="Appointments">
             <EntityTypeMapping TypeName="MatieSalonModel.Appointments">
               <MappingFragment StoreEntitySet="Appointments">
@@ -815,24 +814,6 @@
                 <ScalarProperty Name="QueueNumber" ColumnName="QueueNumber" />
                 <ScalarProperty Name="StatusID" ColumnName="StatusID" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AppointmentStatuses">
-            <EntityTypeMapping TypeName="MatieSalonModel.AppointmentStatuses">
-              <MappingFragment StoreEntitySet="AppointmentStatuses">
-                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
-                <ScalarProperty Name="StatusName" ColumnName="StatusName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Collections">
-            <EntityTypeMapping TypeName="MatieSalonModel.Collections">
-              <MappingFragment StoreEntitySet="Collections">
-                <ScalarProperty Name="CollectionID" ColumnName="CollectionID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -913,22 +894,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Services">
-            <EntityTypeMapping TypeName="MatieSalonModel.Services">
-              <MappingFragment StoreEntitySet="Services">
-                <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="BasePrice" ColumnName="BasePrice" />
-                <ScalarProperty Name="Duration" ColumnName="Duration" />
-                <ScalarProperty Name="CollectionID" ColumnName="CollectionID" />
-                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="MatieSalonModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
@@ -958,6 +923,40 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="AppointmentStatuses">
+            <EntityTypeMapping TypeName="MatieSalonModel.AppointmentStatuses">
+              <MappingFragment StoreEntitySet="AppointmentStatuses">
+                <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Collections">
+            <EntityTypeMapping TypeName="MatieSalonModel.Collections">
+              <MappingFragment StoreEntitySet="Collections">
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CollectionID" ColumnName="CollectionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Services">
+            <EntityTypeMapping TypeName="MatieSalonModel.Services">
+              <MappingFragment StoreEntitySet="Services">
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="CollectionID" ColumnName="CollectionID" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="BasePrice" ColumnName="BasePrice" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -974,7 +973,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
       </DesignerInfoPropertySet>
     </Options>

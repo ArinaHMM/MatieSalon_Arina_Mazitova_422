@@ -37,14 +37,12 @@ namespace MatieSalon_Arina_Mazitova_422.Pages
 
             
 
-            // Проверка уникальности
             if (App.db.Users.Any(u => u.Email == email || u.Username == username))
             {
                 MessageBox.Show("Такой пользователь уже существует.");
                 return;
             }
 
-            // Хеширование пароля
 
             var newUser = new Users
             {
@@ -54,7 +52,7 @@ namespace MatieSalon_Arina_Mazitova_422.Pages
                 Username = username,
                 PasswordHash = password,
                 Bio = bio,
-                RoleID = 2, // Например, обычный пользователь
+                RoleID = 1, 
                 Balance = 0.00m,
                 QualificationLevel = 1,
                 IsActive = true,
@@ -65,7 +63,7 @@ namespace MatieSalon_Arina_Mazitova_422.Pages
             App.db.SaveChanges();
 
             MessageBox.Show("Регистрация прошла успешно!");
-            NavigationService.GoBack(); // или Navigate(new AuthPage());
+            NavigationService.GoBack(); 
         }
 
       
